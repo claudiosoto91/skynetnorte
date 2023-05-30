@@ -11,10 +11,15 @@
     />
     <link rel="stylesheet" href="build/css/app.css" />
 
-    <script
-      src="https://kit.fontawesome.com/808781cc1c.js"
-      crossorigin="anonymous"
-    ></script>
+    <script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+  </script>
+  <script type="text/javascript">
+    (function(){
+        emailjs.init("0cwPdATgEeuZG0Cny");
+    })();
+  </script>
+
     <title>Skynet - Contacto</title>
   </head>
   <body>
@@ -49,20 +54,23 @@
       <div class="formulario__flex">
         <div class="formulario__imagen"></div>
         <div class="formulario__datos">
-          <form id="miFormulario" method="POST">
-            <input
-              type="hidden"
-              name="_autoresponse"
-              value="Gracias por contactarte con Skynet! Pronto nos pondremos en contacto contigo."
-            />
+          <form id="miFormulario">
             <div class="formulario__campos">
               <div class="formulario__inputs">
                 <input
                   type="text"
-                  name="nombre"
-                  id="Nombre"
-                  class="form-control"
+                  name="name"
+                  id="name"
                   placeholder="Nombre"
+                  required
+                />
+              </div>
+              <div class="formulario__inputs">
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  placeholder="Consultar / Comprar"
                   required
                 />
               </div>
@@ -70,8 +78,7 @@
                 <input
                   type="email"
                   name="email"
-                  id="Email"
-                  class="form-control"
+                  id="email"
                   placeholder="Email"
                   required
                 />
@@ -81,8 +88,8 @@
               <textarea
                 placeholder="Tu Mensaje aquí"
                 class="formulario__textArea"
-                id="Mensaje"
-                name="mensaje"
+                id="message"
+                name="message"
                 rows="7"
                 cols="40"
                 required
@@ -196,46 +203,58 @@
       </p>
     </footer>
 
+
+
     <script>
-        document.getElementById("miFormulario").addEventListener("submit", function(event) {
-  event.preventDefault(); // Evita que el formulario se envíe automáticamente
+      //Envio de Email
+      function isValidEmail(email) {
+      const emailRegex = /\S+@\S+\.\S+/;
+      return emailRegex.test(email);
+      }
+    document.getElementById("miFormulario").addEventListener("submit", function(event) {
+    event.preventDefault(); // Evitar el comportamiento predeterminado de envío del formulario
 
-  // Obtén los datos del formulario
-  var form = event.target;
-  var formData = new FormData(form);
+    // Obtener los valores del formulario utilizando FormData
+    var formData = new FormData(this);
+    
+    // Obtener los valores individuales
+    var nombre = formData.get("name");
+    var asunto = formData.get("subject");
+    var email = formData.get("email");
+    var mensaje = formData.get("message");
 
-  // Obtén los valores específicos del formulario
-  var nombre = formData.get("nombre");
-  var email = formData.get("email");
-  var mensaje = formData.get("mensaje");
+    // Realizar cualquier acción adicional que desees con los valores capturados
+    console.log("Nombre: " + nombre);
+    console.log("Asunto: " + asunto);
+    console.log("Email: " + email);
+    console.log("Mensaje: " + mensaje);
 
-  // Muestra los valores en la consola
-  console.log("Nombre:", nombre);
-  console.log("Email:", email);
-  console.log("Mensaje:", mensaje);
+    // Aquí puedes enviar los datos a un servidor utilizando AJAX u otras técnicas si lo deseas
 
-  // Realiza la solicitud POST a FormSubmit.co para enviar el formulario
-  fetch("https://formsubmit.co/ajax/silakweb@gmail.com", {
-    method: "POST",
-    headers: { 
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-    },
-    body: JSON.stringify({
-        Nombre: nombre,
-        Email: email,
-        Mensaje:  mensaje,
+      const isValid = isValidEmail(email);
+      const form = document.getElementById("miFormulario");
 
-    })
-})
-    .then(response => response.json())
-    .then(data => {
-        form.reset(),
-        alert("Mensaje Enviado con éxito"),
-        console.log(data)
-    })
-    .catch(error => console.log(error));
-});
+      if ( !isValid ) {
+        alert("Todos los campos deben llenarse.");
+      }else {
+        emailjs.send("service_ejdktel", "template_r479dti", {
+        from_name: nombre,
+        subject: asunto,
+        to_email: email,
+        message_html: mensaje
+      }).then((response) => {
+        console.log('Email sent:', response);
+        alert('Email enviado con Éxito!');
+        form.reset();
+      }, (error) => {
+        console.error('Error sending email:', error);
+        alert('Email no enviado.');
+      });
+      }
+
+  });
+
+
 
     </script>
   </body>
