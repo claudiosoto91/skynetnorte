@@ -26,6 +26,10 @@
       href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Roboto:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"
+/>
     <link rel="stylesheet" href="build/css/app.css" />
 
     <script
@@ -79,31 +83,6 @@
       </a>
     </div>
 
-    <button id="btnAbrirModal">Novedades</button>
-    <!-- Modal -->
-    <div id="miModal" class="modal">
-      <div class="modal-contenido">
-        <span class="cerrar-modal" id="btnCerrarModal">&times;</span>
-        <h3 class="modal-titulo">Reforzando la seguridad en la zona bancaria de San Isidro de Lules</h3>
-        <!-- Galería de imágenes -->
-        <div class="galeria">
-          <img src="build/img/lules-1.jpg" alt="imagen trabajo en lules" />
-          <img src="build/img/lules-2.jpg" alt="imagen trabajo en lules" />
-          <img src="build/img/lules-3.jpg" alt="imagen trabajo en lules" />
-          <img src="build/img/lules-4.jpg" alt="imagen trabajo en lules" />
-          <!-- Agrega más imágenes según necesites -->
-        </div>
-        <div class="modal-imagen">
-            <a href="/">
-                <img src="build/img/skynet-logo-1.png" alt="imagen logo skynet">
-            </a>
-        </div>
-        <!-- Botones de navegación -->
-        <a class="anterior" onclick="cambiarImagen(-1)">&#10094;</a>
-        <a class="siguiente" onclick="cambiarImagen(1)">&#10095;</a>
-      </div>
-    </div>
-
     <header class="header">
       <div class="header__barra contenedor">
         <div class="header__principal">
@@ -144,6 +123,53 @@
         </div>
       </div>
     </header>
+    <!-- <button id="btnAbrirModal" data-fancybox data-src="#dialog-content">Novedades</button> -->
+
+  
+    <div id="dialog-content" style="display:none;min-width:50vw;min-height: 50wh;">
+      <div style="display:flex;gap: 20px;">
+        <div style="width: 50%;">
+          <h5>Trabajo en Lules</h5>
+
+          <a href="build/img/lules-1.jpg" data-fancybox="gallery-a" data-caption="Gallery A #1">
+            <img style="object-fit: cover;" width="400" height="400" src="build/img/lules-1.jpg" />
+          </a>
+        </div>
+
+        <div style="width: 50%;">
+          <h5>Trabajo terminado - Tafi del Valle</h5>
+          <a href="https://lipsum.app/id/4/1024x768" data-fancybox="gallery-b" data-caption="Gallery B #1">
+            <img style="object-fit: cover;" width="400" height="400" src="https://lipsum.app/id/4/200x150" />
+          </a>
+        </div>
+      </div>
+
+
+      <div style="display:none">
+        <a href="build/img/lules-2.jpg" data-fancybox="gallery-a" data-caption="Gallery A #2">
+          <img src="build/img/lules-2.jpg" />
+        </a>
+        <a href="build/img/lules-3.jpg" data-fancybox="gallery-a" data-caption="Gallery A #3">
+          <img src="build/img/lules-3.jpg" />
+        </a>
+      </div>
+
+      <div style="display:none">
+
+        <a href="https://lipsum.app/id/5/1024x768" data-fancybox="gallery-b" data-caption="Gallery B #2">
+          <img src="https://lipsum.app/id/5/200x150" />
+        </a>
+
+        <a href="https://lipsum.app/id/6/1024x768" data-fancybox="gallery-b" data-caption="Gallery B #3">
+          <img src="https://lipsum.app/id/6/200x150" />
+        </a>
+      </div>
+
+    </div>
+
+
+    </div>
+    
 
     <main class="propiedades contenedor">
       <h2 class="propiedades__heading">Nuestras <span>Promos</span></h2>
@@ -166,7 +192,7 @@
               calidad, detección de movimiento y acceso remoto. Es una solución
               completa para proteger tu hogar y brindarte tranquilidad.
             </p>
-            <p class="propiedad__precio">$ 122.0000 + IVA</p>
+            <p class="propiedad__precio"></p>
             <a
               href="https://api.whatsapp.com/send/?phone=3815222222&text=Hola Liliana, quisiera recibir información sobre la Promo Hogar Seguro"
               target="_blank"
@@ -195,7 +221,7 @@
               completa para proteger tu negocio, mantener un control visual y
               brindar tranquilidad.
             </p>
-            <p class="propiedad__precio">$ 145.000 + IVA</p>
+            <p class="propiedad__precio"></p>
             <a
               href="https://api.whatsapp.com/send/?phone=3815222222&text=Hola Liliana, quisiera recibir más info sobre la Promo Negocio Seguro"
               target="_blank"
@@ -231,7 +257,7 @@
           </p>
           <p class="destacada__texto">Con Audio Bidireccional</p>
           <p class="destacada__texto">Incluye Instalación</p>
-          <p class="destacada__precio">$ 54.500 + IVA</p>
+          <p class="destacada__precio"></p>
           <a
             href="https://api.whatsapp.com/send/?phone=3815222222&text=Hola Liliana, quisiero recibir el producto destacado (EZVIZ 360°)"
             target="_blank"
@@ -497,6 +523,7 @@
       </p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
     <script src="js/app.js"></script>
   </body>
 </html>

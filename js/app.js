@@ -53,3 +53,16 @@ document.addEventListener("DOMContentLoaded", function () {
         cambiarImagen(1);
     });
 });
+Fancybox.bind('[data-fancybox]', {
+    // Custom options for all galleries
+  });  
+  Fancybox.bind('[data-fancybox="gallery-a"]', {
+    // Custom options for the first gallery
+  });    
+
+  Fancybox.bind('[data-fancybox="gallery-b"]', {
+    // Custom options for the second gallery
+    Carousel : {
+      infinite: false
+    }
+  });  
